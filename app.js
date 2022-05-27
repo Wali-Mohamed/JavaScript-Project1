@@ -2,75 +2,76 @@ document.addEventListener('DOMContentLoaded', () => {
   //card options
   const cardArray = [
     {
-      name: 'fries',
-      img: 'images/fries.png'
+      name: 'lemonade',
+      img: 'images1/drink.png'
     },
     {
-      name: 'cheeseburger',
-      img: 'images/cheeseburger.png'
+      name: 'burgernchips',
+      img: 'images1/eat.png'
     },
     {
-      name: 'ice-cream',
-      img: 'images/ice-cream.png'
+      name: 'mopnbucket',
+      img: 'images1/mop.png'
     },
     {
-      name: 'pizza',
-      img: 'images/pizza.png'
+      name: 'skates',
+      img: 'images1/skate.png'
     },
     {
-      name: 'milkshake',
-      img: 'images/milkshake.png'
+      name: 'swing',
+      img: 'images1/swing.png'
     },
     {
-      name: 'hotdog',
-      img: 'images/hotdog.png'
+      name: 'pen',
+      img: 'images1/write.png'
     },
     {
-      name: 'fries',
-      img: 'images/fries.png'
+      name: 'lemonade',
+      img: 'images1/drink.png'
     },
     {
-      name: 'cheeseburger',
-      img: 'images/cheeseburger.png'
+      name: 'burgernchips',
+      img: 'images1/eat.png'
     },
     {
-      name: 'ice-cream',
-      img: 'images/ice-cream.png'
+      name: 'mopnbucket',
+      img: 'images1/mop.png'
     },
     {
-      name: 'pizza',
-      img: 'images/pizza.png'
+      name: 'skates',
+      img: 'images1/skate.png'
     },
     {
-      name: 'milkshake',
-      img: 'images/milkshake.png'
+      name: 'swing',
+      img: 'images1/swing.png'
     },
     {
-      name: 'hotdog',
-      img: 'images/hotdog.png'
+      name: 'pen',
+      img: 'images1/write.png'
     }
-  ]
+  ];
 
   // there are six cards but 12 in object as there are doubles
-  cardArray.sort(() => 0.5 - Math.random())
+  cardArray.sort(() => 0.5 - Math.random());
   
 
-  const grid = document.querySelector('.grid')
-  const next = document.querySelector('.next')
-  const resultDisplay = document.querySelector('#result')
-  let cardsChosen = []
-  let cardsChosenId = []
-  let cardsWon = []
-  let lost=0
+  const grid = document.querySelector('.grid');
+  const next = document.querySelector('.next');
+  const resultDisplay = document.querySelector('#result');
+  let cardsChosen = [];
+  let cardsChosenId = [];
+  let cardsWon = [];
+  let lost=0;
   //create your board
   function createBoard() {
     for (let i = 0; i < cardArray.length; i++) {
-      const card = document.createElement('img')
-      card.setAttribute('src', 'images/blank.png')
-      card.setAttribute('data-id', i)
-      card.addEventListener('click', flipCard)
-      card.addEventListener('click',start)
-      grid.appendChild(card)
+      const card = document.createElement('img');
+      card.setAttribute('src', 'images1/blank.png');
+      card.setAttribute('width', '195');
+      card.setAttribute('data-id', i);
+      card.addEventListener('click', flipCard);
+      card.addEventListener('click',start);
+      grid.appendChild(card);
       //console.log(card)
     }
   }
@@ -78,38 +79,38 @@ document.addEventListener('DOMContentLoaded', () => {
  
   //check for matches
   function checkForMatch() {
-    const cards = document.querySelectorAll('img')
-    const optionOneId = cardsChosenId[0]
-    const optionTwoId = cardsChosenId[1]
+    const cards = document.querySelectorAll('img');
+    const optionOneId = cardsChosenId[0];
+    const optionTwoId = cardsChosenId[1];
     
     
     if(optionOneId == optionTwoId) {
-      cards[optionOneId].setAttribute('src', 'images/blank.png')
-      cards[optionTwoId].setAttribute('src', 'images/blank.png')
-      alert('You have clicked the same image!')
+      cards[optionOneId].setAttribute('src', 'images1/blank.png');
+      cards[optionTwoId].setAttribute('src', 'images1/blank.png');
+      alert('You have clicked the same image!');
     }
     else if (cardsChosen[0] === cardsChosen[1]) {
       //alert('You found a match')
-      cards[optionOneId].setAttribute('src', 'images/white.png')
-      cards[optionTwoId].setAttribute('src', 'images/white.png')
-      cards[optionOneId].removeEventListener('click', flipCard)
-      cards[optionTwoId].removeEventListener('click', flipCard)
-      cardsWon.push(cardsChosen)
+      cards[optionOneId].setAttribute('src', 'images1/white.png');
+      cards[optionTwoId].setAttribute('src', 'images1/white.png');
+      cards[optionOneId].removeEventListener('click', flipCard);
+      cards[optionTwoId].removeEventListener('click', flipCard);
+      cardsWon.push(cardsChosen);
       
     } else {
-      cards[optionOneId].setAttribute('src', 'images/blank.png')
-      cards[optionTwoId].setAttribute('src', 'images/blank.png')
-      //alert('Sorry, try again')
-      lost++
-      console.log(lost)
+      cards[optionOneId].setAttribute('src', 'images1/blank.png');
+      cards[optionTwoId].setAttribute('src', 'images1/blank.png');
+      alert('Sorry, try again')
+      lost++;
+      console.log(lost);
     }
-    cardsChosen = []
-    cardsChosenId = []
-    resultDisplay.textContent = cardsWon.length
+    cardsChosen = [];
+    cardsChosenId = [];
+    resultDisplay.textContent = cardsWon.length;
     if  (cardsWon.length === cardArray.length/2) {
-      resultDisplay.innerHTML = `Congratulations! You found them all!<br> Number of lost attempts: ${lost}`
-      next.style.display='block'
-      pause()
+      resultDisplay.innerHTML = `Congratulations! You found them all!<br> Number of lost attempts: ${lost}`;
+      next.style.display='block';
+      pause();
           
       
     }
@@ -117,96 +118,101 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //flip your card
   function flipCard() {
-    let cardId = this.getAttribute('data-id')
-    cardsChosen.push(cardArray[cardId].name)
-    cardsChosenId.push(cardId)
-    this.setAttribute('src', cardArray[cardId].img) 
+    let cardId = this.getAttribute('data-id');
+    cardsChosen.push(cardArray[cardId].name);
+    cardsChosenId.push(cardId);
+    this.setAttribute('src', cardArray[cardId].img); 
     if (cardsChosen.length ===2) {
-      setTimeout(checkForMatch, 500)
+      setTimeout(checkForMatch, 500);
     }
   }
   
-  createBoard()
+  createBoard();
 })
-const next = document.querySelector('.next')
+const next = document.querySelector('.next');
 next.onclick = () => {
-  let grid = document.querySelector('.grid')  
+  let grid = document.querySelector('.grid') ;
+  next.style.display='none' ;
+  reset();
   while (grid.firstChild){
     grid.removeChild(grid.lastChild);
   }
   
+  
 //card options
 const cardArray = [
   {
-    name: 'fries',
-    img: 'images2/fries.png'
+    name: 'drinking',
+    img: 'images2/drinking.png'
   },
   {
-    name: 'cheeseburger',
-    img: 'images2/cheeseburger.png'
+    name: 'eating',
+    img: 'images2/eating.PNG'
   },
   {
-    name: 'ice-lolly',
-    img: 'images2/ice-lolly.png'
+    name: 'moppimg',
+    img: 'images2/mopping.png'
   },
   {
-    name: 'pizza',
-    img: 'images2/pizza.png'
+    name: 'skating',
+    img: 'images2/skating.png'
   },
   {
-    name: 'milkshake',
-    img: 'images2/milkshake.png'
+    name: 'swinging',
+    img: 'images2/swinging.png'
   },
   {
-    name: 'hotdog',
-    img: 'images2/hotdog.png'
+    name: 'writing',
+    img: 'images2/writing.JPG'
   },
   {
-    name: 'fries',
-    img: 'images2/fries word.png'
+    name: 'drinking',
+    img: 'images2/drinkingword.png'
   },
   {
-    name: 'cheeseburger',
-    img: 'images2/cheeseburger word.png'
+    name: 'eating',
+    img: 'images2/eatingword.PNG'
   },
   {
-    name: 'ice-lolly',
-    img: 'images2/ice lolly word.png'
+    name: 'moppimg',
+    img: 'images2/moppingword.png'
   },
   {
-    name: 'pizza',
-    img: 'images2/pizza word.png'
+    name: 'skating',
+    img: 'images2/skatingword.png'
   },
   {
-    name: 'milkshake',
-    img: 'images2/milkshake word.png'
+    name: 'swinging',
+    img: 'images2/swingingword.png'
   },
   {
-    name: 'hotdog',
-    img: 'images2/hotdog word.png'
-  }
-]
+    name: 'writing',
+    img: 'images2/writingword.png'
+  },
+];
 
 // there are six cards but 12 in object as there are doubles
-cardArray.sort(() => 0.5 - Math.random())
+cardArray.sort(() => 0.5 - Math.random());
 
 
 //const grid = document.querySelector('.grid')
 //const next = document.querySelector('.next')
-const resultDisplay = document.querySelector('#result')
-let cardsChosen = []
-let cardsChosenId = []
-let cardsWon = []
-let lost=0
+const resultDisplay = document.querySelector('#result');
+let cardsChosen = [];
+let cardsChosenId = [];
+let cardsWon = [];
+let lost=0;
 //create your board
 function createBoard() {
   for (let i = 0; i < cardArray.length; i++) {
-    const card = document.createElement('img')
-    card.setAttribute('src', 'images2/blank.png')
-    card.setAttribute('data-id', i)
-    card.addEventListener('click', flipCard)
-    card.addEventListener('click', start)
-    grid.appendChild(card)
+    const card = document.createElement('img');
+    card.setAttribute('src','images2/blank.png');
+    card.setAttribute('data-id', i);
+    card.setAttribute('width', '195');
+    card.setAttribute('alt', 'blank pic');
+    card.addEventListener('click', flipCard);
+    card.addEventListener('click', start);
+    grid.appendChild(card);
     //console.log(card)
   }
 }
@@ -214,38 +220,37 @@ function createBoard() {
 
 //check for matches
 function checkForMatch() {
-  const cards = document.querySelectorAll('img')
-  const optionOneId = cardsChosenId[0]
-  const optionTwoId = cardsChosenId[1]
+  const cards = document.querySelectorAll('img');
+  const optionOneId = cardsChosenId[0];
+  const optionTwoId = cardsChosenId[1];
   
   
   if(optionOneId == optionTwoId) {
-    cards[optionOneId].setAttribute('src', 'images2/blank.png')
-    cards[optionTwoId].setAttribute('src', 'images2/blank.png')
-    alert('You have clicked the same image!')
+    cards[optionOneId].setAttribute('src', 'images2/blank.png');
+    cards[optionTwoId].setAttribute('src', 'images2/blank.png');
+    alert('You have clicked the same image!');
   }
   else if (cardsChosen[0] === cardsChosen[1]) {
     //alert('You found a match')
-    cards[optionOneId].setAttribute('src', 'images2/white.png')
-    cards[optionTwoId].setAttribute('src', 'images2/white.png')
-    cards[optionOneId].removeEventListener('click', flipCard)
-    cards[optionTwoId].removeEventListener('click', flipCard)
-    cardsWon.push(cardsChosen)
+    cards[optionOneId].setAttribute('src', 'images2/white.png');
+    cards[optionTwoId].setAttribute('src', 'images2/white.png');
+    cards[optionOneId].removeEventListener('click', flipCard);
+    cards[optionTwoId].removeEventListener('click', flipCard);
+    cardsWon.push(cardsChosen);
     
   } else {
-    cards[optionOneId].setAttribute('src', 'images2/blank.png')
-    cards[optionTwoId].setAttribute('src', 'images2/blank.png')
+    cards[optionOneId].setAttribute('src', 'images2/blank.png');
+    cards[optionTwoId].setAttribute('src', 'images2/blank.png');
     //alert('Sorry, try again')
-    lost++
-    console.log(lost)
+    lost++;
+    console.log(lost);
   }
-  cardsChosen = []
-  cardsChosenId = []
-  resultDisplay.textContent = cardsWon.length
+  cardsChosen = [];
+  cardsChosenId = [];
+  resultDisplay.textContent = cardsWon.length;
   if  (cardsWon.length === cardArray.length/2) {
-    resultDisplay.innerHTML = `Congratulations! You found them all!<br> Number of lost attempts: ${lost}`
-    next.style.display='none'
-    pause()
+    resultDisplay.innerHTML = `Congratulations! You found them all!<br> Number of lost attempts: ${lost}`;
+    pause();
 
     
     
@@ -254,14 +259,14 @@ function checkForMatch() {
 
 //flip your card
 function flipCard() {
-  let cardId = this.getAttribute('data-id')
-  cardsChosen.push(cardArray[cardId].name)
-  cardsChosenId.push(cardId)
-  this.setAttribute('src', cardArray[cardId].img) 
+  let cardId = this.getAttribute('data-id');
+  cardsChosen.push(cardArray[cardId].name);
+  cardsChosenId.push(cardId);
+  this.setAttribute('src', cardArray[cardId].img); 
   if (cardsChosen.length ===2) {
-    setTimeout(checkForMatch, 500)
+    setTimeout(checkForMatch, 500);
   }
-}
+};
 
 createBoard()
 }
@@ -283,11 +288,11 @@ function pause(){
     clearInterval(int);
  };
 // reset button
-document.querySelector('.stop').addEventListener('click', ()=>{
-    clearInterval(int);
-    [milliseconds,seconds,minutes] = [0,0,0];
-    timerRef.innerHTML = '00 : 00 : 000';
-});
+function reset(){
+     clearInterval(int);
+     [milliseconds,seconds,minutes] = [0,0,0];
+     timerRef.innerHTML = '00 : 00 : 000';
+     };
 
 // display timer
 function displayTimer(){
